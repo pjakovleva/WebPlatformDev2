@@ -1,0 +1,26 @@
+{
+  "name": "wpd2_coursework",
+  "version": "1.0.0",
+  "description": "This application is part of the Web Platform Development 2 module coursework.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pjakovleva/WPD2_Coursework.git"
+  },
+  "author": "Polina Jakovleva",
+  "keywords": [
+    "node.js",
+    "express"
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pjakovleva/WPD2_Coursework/issues"
+  },
+  "homepage": "https://github.com/pjakovleva/WPD2_Coursework#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
