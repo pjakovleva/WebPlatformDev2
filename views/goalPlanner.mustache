@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+{{>header}}
+</head>
+
+<body>
+
+{{> navBar}}
+
+<h1>{{title}}</h1>
+<table>
+  <tr>
+    <td>
+    <div class="dropdown">
+  <button class="btn btn-primary">Filter list..</button>
+  <div class="dropdown-content">
+    <a>Complete goals</a>
+    <a>Incomplete goals</a>
+  </div>
+</div>
+</div>
+</td>
+<td>
+<button class="btn btn-primary" href="/new"> Add new goals </button>
+</td>
+  </tr>
+  </table>
+
+<div class = "card">
+<div class="card-body">
+<div class = "card text">
+</div>
+<div class="card-text">
+    <h2> User: </h2> {{user}}
+    {{#goal}}
+    <p>Type of exercise: </p>{{typeOfExercise}}
+    <p>Duration: </p> {{exerciseDuration}}
+    <p>Date: </p> {{goalDate}}
+  {{/goal}}
+    <p><button type="button" class="btn btn-default btn-sm pull-right"><span class="glyphicon glyphicon-share">Share</span></button></p>
+</div>
+</div>
+   {{^goal}}
+    No goals yet.
+   {{/goal}}
+    
+</body>
+
+</html>
