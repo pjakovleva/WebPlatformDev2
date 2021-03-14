@@ -21,6 +21,8 @@
   },
   "homepage": "https://github.com/pjakovleva/WPD2_Coursework#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "nedb": "^1.8.0",
+    "path": "^0.12.7"
   }
 }
