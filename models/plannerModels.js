@@ -34,6 +34,39 @@ class GoalPlanner {
 });
                 console.log('Katie\'s goals inserted.')
             }
+// update details for a goal
+updateGoal() {
+    return new Promise((resolve, reject) => {
+    this.db.update({ 'user': 'John', 'goal.typeOfExercise': 'Basketball'}, { $set: { 'typeOfExercise': 'Running'} }, {}, function(err, newDocs) {
+    if (err) {
+    console.log('Failed to update goal', err);
+    }  else {
+    console.log(newDocs, 'goal updated.');
+    }
+    })
+    })}
+
+    // delete goals of certain user
+removeGoal() {
+    return new Promise((resolve, reject) => {
+    this.db.remove({ name : 'Katie'}, {}, function(err, remGoal) {
+    if (err) {
+    console.log('Failed to delete goal.');
+    } else {
+    console.log('Katie\'s goal has been deleted.');
+    }
+    })})}
+
+    // see the goals  
+getAllGoals() {
+    return new Promise((resolve, reject) => {
+        this.db.find({}, function(err, goals) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(goals);
+} })
+}) }
 
 
 }

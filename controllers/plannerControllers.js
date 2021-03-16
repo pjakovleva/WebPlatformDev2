@@ -20,5 +20,12 @@ exports.goal_planner = function(req, res) {
 .catch((err) => {
     console.log('Goals not found: ', err);
 })
+db.removeGoal(req.body.user);
+db.updateGoal();
+}
 
+exports.server_error = function(err, req, res, next) {
+    res.status(500);
+    res.type('text/plain');
+    res.send('Internal Server Error.');
 }
