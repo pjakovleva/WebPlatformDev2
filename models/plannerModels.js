@@ -68,5 +68,39 @@ getAllGoals() {
 } })
 }) }
 
+// search goal by type of exercise
+getJohnsGoals() {
+    return new Promise((resolve, reject) => {
+        this.db.find({ 'John': user }, function(err, goals) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(goals);
+                console.log('Search results: ', goals);
+            }
+        })
+    })
+}
+
+// create new goal and add it to the database
+addGoal(user, typeOfExercise, goalDate, exerciseDuration) {
+    var goal = {
+        user: user,
+        typeOfExercise: typeOfExercise,
+        goalDate: goalDate,
+        exerciseDuration: exerciseDuration,
+    }
+    console.log('Goal added: ', goal); 
+
+    this.db.insert(goal, function(err, doc) {
+        if (err) {
+            console.log('Error inserting new goal', typeOfExercise);
+        } else {
+            console.log('Goal added to the database: ', doc);
+        }
+})
+}
 
 }
+
+module.exports = GoalPlanner;

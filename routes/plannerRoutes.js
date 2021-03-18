@@ -8,6 +8,9 @@ router.get("/", controller.landing_page);
 
 router.get("/planner", controller.goal_planner); 
 
+router.get('/new', controller.show_new_goals);
+router.post('/new', controller.post_new_goal);
+
 // HTML response
 router.get('/about', function(req, res) {
     res.redirect('/about.html');

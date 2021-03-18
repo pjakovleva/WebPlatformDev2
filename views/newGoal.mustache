@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+{{>header}}
+</head>
+
+<body>
+{{>navBar}}
+
+<title> {{title}} </title>
+
+<form method="post" role="form">
+  <div class="form-group">
+    <label for="user">User</label>
+    <input type="text" class="form-control" id="user"
+           name="user" placeholder="Post by" required>
+  </div>
+
+  <div class="form-group">
+    <label for="typeOfExercise">Type of exercise..</label>
+    <input type="text" class="form-control" id="typeOfExercise"
+           name="typeOfExercise" placeholder="Enter the type of exercise"
+required>
+  </div>
+
+<div class="form-group">
+    <label for="goalDate">Date..</label>
+    <input type="text" class="form-control" id="goalDate"
+name="goalDate" placeholder="Enter day of the week" required>   </div>
+
+  <div class="form-group">
+    <label for="exerciseDuration">Goal workout duration..</label>
+    <input type="text" class="form-control" id="exerciseDuration" name="exerciseDuration"
+              placeholder="Enter the duration" rows="3"
+required></div>
+
+  <div class="form-group">
+  <input type="submit" value="Submit goals" class="btn btn-primary">
+  </div>
+</form>
+
+</body>
+</html>
