@@ -6,6 +6,10 @@ const controller = require('../controllers/calendarControllers.js');
 
 router.get("/", controller.landing_page); 
 
+// routes for the registration page
+router.get('/register', controller.show_register_page);
+router.post('/register', controller.post_new_user);
+
 // route for the user's goal calendar page
 router.get('/mycalendar', controller.goal_calendar);
 

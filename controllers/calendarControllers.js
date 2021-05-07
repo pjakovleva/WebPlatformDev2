@@ -1,5 +1,6 @@
 const { response } = require('express');
 const goalCalendarDAO = require('../models/calendarModels.js');
+const userDao = require('../models/userModel.js');
 const db = new goalCalendarDAO('goals.db');
 db.init();
 
@@ -7,6 +8,30 @@ db.init();
 exports.landing_page = function(req, res) {
     res.render('landingPage', {
         'title': 'Welcome'});
+}
+
+// REGISTRATION
+// implementing the ability to use the registration page
+exports.show_register_page = function(req, res) { 
+    res.render('user/register', {
+        'title': 'Goal Calendar'});
+}
+
+// implementing the ability to register new users
+exports.post_new_user = function(req, res) {
+    const user = req.body.username;
+    const password = req.body.pass;
+    console.log('New user registered. Username: ', user, 'Password: ',  password);
+    if (!user || !password) {
+        res.send('goal must contain username and password.');
+return; }
+    userDao.lookup(user, function(err, u) {
+        if (u) {
+            res.send('User with the same name already exists', user);
+return; }
+        userDao.create(user, password);
+        res.redirect('/login');
+    });
 }
 
 // GOAL CALENDAR
