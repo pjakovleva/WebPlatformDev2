@@ -1,15 +1,17 @@
 const express = require('express');
 const router = express.Router(); 
-const controller = require('../controllers/plannerControllers');
+const controller = require('../controllers/calendarControllers.js');
 
 // Template responses and post requests 
 
 router.get("/", controller.landing_page); 
 
-router.get("/planner", controller.goal_planner); 
+// route for the user's goal calendar page
+router.get('/mycalendar', controller.goal_calendar);
 
-router.get('/new', controller.show_new_goals);
-router.post('/new', controller.post_new_goal);
+// routes for the new goal goal page
+router.get('/newgoals', controller.show_new_goals);
+router.post('/newgoals', controller.post_new_goals);
 
 // HTML response
 router.get('/about', function(req, res) {

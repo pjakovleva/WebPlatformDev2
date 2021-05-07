@@ -1,42 +1,49 @@
 const { response } = require('express');
-const goalPlannerDAO = require('../models/plannerModels.js');
-const db = new goalPlannerDAO('goals.db');
+const goalCalendarDAO = require('../models/calendarModels.js');
+const db = new goalCalendarDAO('goals.db');
 db.init();
 
+//LANDING PAGE 
 exports.landing_page = function(req, res) {
-    res.render('home', {
-        'title': 'Welcome to my application!'
-    });
+    res.render('landingPage', {
+        'title': 'Welcome'});
 }
 
-exports.goal_planner = function(req, res) {
-    db.getAllGoals()
-    .then((list) => {
-    res.render('goalPLanner',   {
-        'title' : 'Goal Planner',
-        'goal': list 
-}); 
+// GOAL CALENDAR
+// implementing the ability to view a user's goal calendar 
+exports.goal_calendar = function(req, res) {
+    let author = 'Polina';
+    db.getGoalsByPolina(author).then((list) => {
+    res.render('goalCalendar', {
+     'title': 'Goal Calendar',
+     'week': list,
+     'user': req.user
+ });
+}).catch((err) => {
+    console.log('Error retrieving all goals: ', err);
 })
-.catch((err) => {
-    console.log('Goals not found: ', err);
-})
-db.removeGoal(req.body.user);
+
+db.deleteGoal();
 db.updateGoal();
 }
 
-exports.post_new_goal = function(req, res) {
-    if (!req.body.typeOfExercise) {
-        res.status(400).send("Goals must have the type of exercise specified.");
-        return;
-}
-    db.addGoal(req.body.user, req.body.typeOfExercise, req.body.goalDate, req.body.exerciseDuration);
-    res.redirect('/new');
-}
-
+// NEW GOAL
+// implementing the ability to use the new goal form 
 exports.show_new_goals = function(req, res) {
     res.render('newGoal', {
-        'title': 'New Goal'
+        'title': 'Goal Calendar',
+        'user': req.user
     })
+}
+
+// implementing the new goal form's ability to handle requests 
+exports.post_new_goals = function(req, res) {
+    if (!req.body.typeOfExercise) {
+        response.status(400).send('Goal calendar entries must have the month specified.');
+        return;
+}
+    db.addGoals(req.body.author, req.body.week, req.body.dayOfWeek, req.body.dateOfMonth, req.body.typeOfExercise, req.body.goalDuration);
+    res.redirect('/mycalendar');
 }
 
 exports.server_error = function(err, req, res, next) {

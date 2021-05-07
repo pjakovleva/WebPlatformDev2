@@ -1,8 +1,8 @@
 const Datastore = require('nedb');
 
-class GoalPlanner {
+class GoalCalendar {
 
-    // constructor for the GoalPlanner class.
+    // constructor for the GoalPlanner class
     constructor(dbFilePath) {
         if (dbFilePath) {
             this.db = new Datastore({ filename: dbFilePath, autoload: true });
@@ -10,63 +10,187 @@ class GoalPlanner {
             this.db = new Datastore();
     } }
 
-    // seeding the database
+    // seeding the database for in-memory use
     init() {
-        this.db.insert({ 
-            user: 'John',
-            age: 22,
-            goal: [{
-            typeOfExercise: 'Basketball',
-            goalDate: '2020-02-16',
-            exerciseDuration: '1 Hour'
-            }]
-}); 
-                console.log('John\'s goals inserted.');
-
         this.db.insert({
-            user: 'Katie',
-            age: 44,
-            goal: [{
-            typeOfExercise: 'Yoga',
-            goalDate: '2020-02-14',
-            exerciseDuration: '1 Hour'
-        }]
-});
-                console.log('Katie\'s goals inserted.')
-            }
-// update details for a goal
+                author: 'Polina',
+                week: 'Current Week',
+                status: 'Incomplete',
+                weekGoals: [{
+                        dayOfWeek: 'Wednesday',
+                        dateOfMonth: '05/05/2021',
+                        typeOfExercise: 'Yoga',
+                        goalDuration: '1 Hour',
+                        actualDuration: '40 Minutes',
+                    },
+                    { 
+                        dayOfWeek: 'Thursday',
+                        dateOfMonth: '06/05/2021',
+                        typeOfExercise: 'Running',
+                        goalDuration: '45 Minutes',
+                        actualDuration: '30 Minutes',
+                    },
+                    {
+                        dayOfWeek: 'Friday',
+                        dateOfMonth: '07/05/2021',
+                        typeOfExercise: 'Boxing',
+                        goalDuration: '2 Hours',
+                    }, 
+
+                ]
+            }, function(err, doc) {
+                if (err) {
+                    console.log('Error inserting goals into database:', err);
+                } else {
+                    console.log('Polina\'s goals inserted into the database.');
+                }
+            });
+
+            this.db.insert({
+                author: 'Polina',
+                status: 'Incomplete',
+                week: 'Last Week',
+                weekGoals: [{
+                        dayOfWeek: 'Wednesday',
+                        dateOfMonth: '28/04/2021',
+                        typeOfExercise: 'Hiking',
+                        goalDuration: '3 Hours',
+                        actualDuration: '40 Minutes',
+                    },
+                    { 
+                        dayOfWeek: 'Thursday',
+                        dateOfMonth: '29/04/2021',
+                        typeOfExercise: 'Running',
+                        goalDuration: '40 Minutes',
+                        actualDuration: '30 Minutes',
+                    },
+                    {
+                        dayOfWeek: 'Friday',
+                        dateOfMonth: '30/04/2021',
+                        typeOfExercise: 'Tennis',
+                        goalDuration: '1 Hour',
+                    }, 
+
+                ]
+            }, function(err, doc) {
+                if (err) {
+                    console.log('Error inserting goals into database:', err);
+                } else {
+                    console.log('Polina\'s goals inserted into the database.');
+                }
+            });
+
+            this.db.insert({
+                author: 'John',
+                status: 'Incomplete',
+                week: 'Current Week',
+                weekGoals: [{
+                        dayOfWeek: 'Wednesday',
+                        dateOfMonth: '05/05/2021',
+                        typeOfExercise: 'Weightlifting',
+                        goalDuration: '1 Hour',
+                        actualDuration: '40 Minutes',
+                    },
+                    { 
+                        dayOfWeek: 'Thursday',
+                        dateOfMonth: '06/05/2021',
+                        typeOfExercise: 'Stretching',
+                        goalDuration: '45 Minutes',
+                    },
+                    {
+                        dayOfWeek: 'Friday',
+                        dateOfMonth: '07/05/2021',
+                        typeOfExercise: 'Swimming',
+                        goalDuration: '2 Hours',
+                    }, 
+
+                ]
+            }, function(err, doc) {
+                if (err) {
+                    console.log('Error inserting goals into database:', err);
+                } else {
+                    console.log('John\'s goals inserted into the database.');
+                }
+            });
+
+            this.db.insert({
+                author: 'John',
+                status: 'Complete',
+                week: 'Last Week',
+                weekGoals: [{
+                        dayOfWeek: 'Wednesday',
+                        dateOfMonth: '05/05/2021',
+                        typeOfExercise: 'Weightlifting',
+                        goalDuration: '1 Hour',
+                        actualDuration: '40 Minutes',
+                    },
+                    { 
+                        dayOfWeek: 'Thursday',
+                        dateOfMonth: '06/05/2021',
+                        typeOfExercise: 'Stretching',
+                        goalDuration: '45 Minutes',
+                        actualDuration: '30 Minutes',
+                    },
+                    {
+                        dayOfWeek: 'Friday',
+                        dateOfMonth: '07/05/2021',
+                        typeOfExercise: 'Rugby',
+                        goalDuration: '2 Hours',
+                        actualDuration: '1 Hour 20 Minutes',
+                    }, 
+
+                ]
+            }, function(err, doc) {
+                if (err) {
+                    console.log('Error inserting goals into database:', err);
+                } else {
+                    console.log('John\'s goals inserted into the database.');
+                }
+            });
+    }
+
+// function that allows a goal to be modified
 updateGoal() {
     return new Promise((resolve, reject) => {
-    this.db.update({ 'user': 'John', 'goal.typeOfExercise': 'Basketball'}, { $set: { 'typeOfExercise': 'Running'} }, {}, function(err, newDocs) {
-    if (err) {
-    console.log('Failed to update goal', err);
-    }  else {
-    console.log(newDocs, 'goal updated.');
-    }
+    this.db.update({
+        'author': 'John', 'weekGoals.typeOfExercise': 'Swimming'
+    }, {
+        $set: {
+            'typeOfExercise': 'Volleyball'
+        }
+    }, {}, function(err, newDocs) {
+        if (err) {
+            console.log('Failed to update goal: ', err);
+        } else {
+            console.log(newDocs, 'Goal successfully updated.');
+        }
     })
+})}
+
+    // function that allows to delete goals for the week
+    deleteGoal() {
+        return new Promise((resolve, reject) => {
+        this.db.remove({ status: 'Complete' }, {}, function(err, numRemoved) {
+            if (err) {
+                console.log('Error deleting goals: ', err);
+            } else {
+                console.log(numRemoved, 'Goals successfully deleted,');
+            }
+        })
     })}
 
-    // delete goals of certain user
-removeGoal() {
-    return new Promise((resolve, reject) => {
-    this.db.remove({ name : 'Katie'}, {}, function(err, remGoal) {
-    if (err) {
-    console.log('Failed to delete goal.');
-    } else {
-    console.log('Katie\'s goal has been deleted.');
+    // function that retrieves all goals from the database
+    getAllGoals() {
+        return new Promise((resolve, reject) => {
+            this.db.find({}, function(err, goals) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(goals);
+                }
+            })
+        })
     }
-    })})}
-
-    // see the goals  
-getAllGoals() {
-    return new Promise((resolve, reject) => {
-        this.db.find({}, function(err, goals) {
-            if (err) {
-                reject(err);
-            } else {
-                resolve(goals);
-} })
-}) }
 
 // search goal by type of exercise
 getJohnsGoals() {
@@ -82,25 +206,39 @@ getJohnsGoals() {
     })
 }
 
-// create new goal and add it to the database
-addGoal(user, typeOfExercise, goalDate, exerciseDuration) {
-    var goal = {
-        user: user,
-        typeOfExercise: typeOfExercise,
-        goalDate: goalDate,
-        exerciseDuration: exerciseDuration,
-    }
-    console.log('Goal added: ', goal); 
+getGoalsByPolina(author) {
+    return new Promise((resolve, reject) => {
+        this.db.find({ 'author': author }, function(err, goals) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(goals);
+            }
+}) })
+}
 
-    this.db.insert(goal, function(err, doc) {
+ // function that allows new goals to be created and added to the database
+ addGoals(author, week, dayOfWeek, dateOfMonth, typeOfExercise, goalDuration) {
+    var goals = {
+        author: author,
+        week: week,
+        weekGoals: {
+        dayOfWeek,
+        dateOfMonth,
+        typeOfExercise,
+        goalDuration }
+    };
+    console.log('New goals created:', dayOfWeek)
+
+    this.db.insert(goals, function(err, doc) {
         if (err) {
-            console.log('Error inserting new goal', typeOfExercise);
+            console.log('Error inserting a new goals to database.', typeOfExercise);
         } else {
-            console.log('Goal added to the database: ', doc);
+            console.log('New goals added to database.', doc);
         }
-})
+    });
 }
 
 }
 
-module.exports = GoalPlanner;
+module.exports = GoalCalendar;

@@ -1,0 +1,60 @@
+<html lang='en'>
+
+<head>
+    {{> partials/header}}
+</head>
+
+<body class='container'>
+
+<a href='/mycalendar' class='btn btn-primary'>Goal Calendar</a>
+
+<a href='/stopwatch' class='btn btn-primary'>Stopwatch</a>
+
+
+    <h1>{{title}}</h1>
+<div class='text-right'>
+        <a href='/newgoals' class='btn btn-primary'>Create new goals!</a>
+</div>
+
+{{#week}}
+    <div class='card'>
+
+    <div class='card-header'>
+        <h2>{{week}}</h2>
+        <b>Status: </b> {{status}}
+    </div>
+
+    <div class='card-body'> 
+{{#weekGoals}}
+    <div class='card-text'>
+        <b>Day of the week: </b>{{dayOfWeek}}
+    </div>
+    <div class='card-text'>
+        <b>Date: </b>{{dateOfMonth}}
+    </div>
+    <div class='card-text'>
+        <b>Type of exercise: </b>{{typeOfExercise}}
+    </div>
+    <div class='card-text'>
+        <b>Goal duration: </b>{{goalDuration}}
+    </div>
+    <div class='card-text'>
+        <b>Actual duration: </b>{{actualDuration}}
+    </div>
+    <br>
+{{/weekGoals}}
+    </div>
+    <div class='card-footer'>
+        <button href='/' class='btn btn-primary' alt='Delete goal'><i class='fa fa-trash'></i> Delete</button>
+        <button href='/' class='btn btn-primary' alt='Edit goal'><i class='fa fa-edit'></i> Edit</button>
+        <button alt='Share goal by link' class='btn btn-primary'><i class='fa fa-share'></i> Share {{_id}}</button>
+    </div>
+</div>
+
+{{/week}}
+
+{{^week}} No entries yet! {{/week}}
+
+</body>
+
+</html>
