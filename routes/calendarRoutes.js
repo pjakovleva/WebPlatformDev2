@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router(); 
+const auth = require('../auth/auth.js'); 
+const {ensureLoggedIn} = require('connect-ensure-login');
 const controller = require('../controllers/calendarControllers.js');
 
 // Template responses and post requests 
@@ -17,11 +19,11 @@ router.post('/login', auth.authorize('/login'), controller.post_login);
 router.get('/logout', controller.logout);
 
 // route for the user's goal calendar page
-router.get('/mycalendar', controller.goal_calendar);
+router.get('/mycalendar', ensureLoggedIn('/login'), controller.goal_calendar);
 
 // routes for the new goal goal page
-router.get('/newgoals', controller.show_new_goals);
-router.post('/newgoals', controller.post_new_goals);
+router.get('/newgoals', ensureLoggedIn('/login'), controller.show_new_goals);
+router.post('/newgoals', ensureLoggedIn('/login'), controller.post_new_goals);
 
 // 404 response
 router.use(function(req, res) {
