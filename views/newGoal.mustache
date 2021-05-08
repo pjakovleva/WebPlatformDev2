@@ -1,43 +1,75 @@
-<!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 
 <head>
-{{>header}}
+    {{> partials/header}}
 </head>
 
-<body>
-{{>navBar}}
+<body class='container'>
 
-<title> {{title}} </title>
+<a href='/mycalendar' class='btn btn-primary'>Goal Calendar</a>
 
-<form method="post" role="form">
-  <div class="form-group">
-    <label for="user">User</label>
-    <input type="text" class="form-control" id="user"
-           name="user" placeholder="Post by" required>
-  </div>
+{{> partials/buttons}}
 
-  <div class="form-group">
-    <label for="typeOfExercise">Type of exercise..</label>
-    <input type="text" class="form-control" id="typeOfExercise"
-           name="typeOfExercise" placeholder="Enter the type of exercise"
-required>
-  </div>
+    <h1>{{title}}</h1>
+    <h3>Add New Goals</h3>
+
+
+<form method='post' role='form'>
 
 <div class="form-group">
-    <label for="goalDate">Date..</label>
-    <input type="text" class="form-control" id="goalDate"
-name="goalDate" placeholder="Enter day of the week" required>   </div>
+        <label for="author">Your name: </label>
+        <input type="text" class="form-control" id="author" name="author" placeholder="Insert your name..." required>
+</div>
 
-  <div class="form-group">
-    <label for="exerciseDuration">Goal workout duration..</label>
-    <input type="text" class="form-control" id="exerciseDuration" name="exerciseDuration"
-              placeholder="Enter the duration" rows="3"
-required></div>
+<div class="form-group">
+        <label for="week">Goal week: </label>
+        <input type="text" class="form-control" id="week" name="week" placeholder="Insert goal week..." required>
+</div>
 
-  <div class="form-group">
-  <input type="submit" value="Submit goals" class="btn btn-primary">
-  </div>
+    <div class='form-group'>
+        <h3>GOAL 1</h3>
+        <label for='dayOfWeek'>Day of the week: </label>
+        <input type='text' class='form-control' id='dayOfWeek' name='dayOfWeek' placeholder='Insert day of week of goal...' required><br>
+        <label for='dateOfMonth'>Date: </label>
+        <input type='text' class='form-control' id='dateOfMonth' name='dateOfMonth' placeholder='Insert date of goal...' required><br>
+        <label for='typeOfExercise'>Type Of Exercise: </label>
+        <input type='text' class='form-control' id='typeOfExercise' name='typeOfExercise' placeholder='Insert type of exercise...' required><br>
+        <label for='goalDuration'>Goal Duration: </label>
+        <input type='text' class='form-control' id='goalDuration' name='goalDuration' placeholder='Insert intended duration...' required>
+    </div>
+
+   <div class='form-group'>
+        <h3>GOAL 2</h3>
+        <label for='dayOfWeek'>Day of the week: </label>
+        <input type='text' class='form-control' id='dayOfWeek' name='dayOfWeek' placeholder='Insert day of week of goal...' required><br>
+        <label for='dateOfMonth'>Date: </label>
+        <input type='text' class='form-control' id='dateOfMonth' name='dateOfMonth' placeholder='Insert date of goal...' required><br>
+        <label for='typeOfExercise'>Type Of Exercise: </label>
+        <input type='text' class='form-control' id='typeOfExercise' name='typeOfExercise' placeholder='Insert type of exercise...' required><br>
+        <label for='goalDuration'>Goal Duration: </label>
+        <input type='text' class='form-control' id='goalDuration' name='goalDuration' placeholder='Insert intended duration...' required><br>
+   </div>
+
+   <div class='form-group'>
+        <h3>GOAL 3</h3>
+        <label for='dayOfWeek'>Day of the week: </label>
+        <input type='text' class='form-control' id='dayOfWeek' name='dayOfWeek' placeholder='Insert day of week of goal...' required><br>
+        <label for='dateOfMonth'>Date: </label>
+        <input type='text' class='form-control' id='dateOfMonth' name='dateOfMonth' placeholder='Insert date of goal...' required><br>
+        <label for='typeOfExercise'>Type Of Exercise: </label>
+        <input type='text' class='form-control' id='typeOfExercise' name='typeOfExercise' placeholder='Insert type of exercise...' required><br>        
+        <label for='goalDuration'>Goal Duration: </label>
+        <input type='text' class='form-control' id='goalDuration' name='goalDuration' placeholder='Insert intended duration...' required><br>
+   </div>
+
+   <div class='form-group'>
+        <button value='Add more goals' class='btn btn-primary'><i class='fa fa-plus'></i> Add more goals</button>
+   </div>
+
+   <div class='form-group'>
+        <input type='submit' value='Submit goals' class='btn btn-primary'>
+   </div>
+
 </form>
 
 </body>

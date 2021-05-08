@@ -1,6 +1,7 @@
 const Datastore = require('nedb');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+const auth = require('../auth/auth.js');
 const {ensureLoggedIn} = require('connect-ensure-login');
 
    class UserDAO {

@@ -34,6 +34,25 @@ return; }
     });
 }
 
+// LOGIN
+// implementing the ability to use the login page
+exports.show_login_page = function(req, res) {
+    res.render('user/login', {
+        'title': 'Goal Calendar'});
+}
+
+// implementing the login's ability to handle login requests
+exports.post_login = function(req, res) {
+    res.redirect('/mycalendar');
+}
+
+// LOG OUT
+// implementing the ability to log out
+exports.logout = function(req, res) {
+    req.logout();
+    res.redirect('/');
+}
+
 // GOAL CALENDAR
 // implementing the ability to view a user's goal calendar 
 exports.goal_calendar = function(req, res) {
@@ -51,6 +70,21 @@ exports.goal_calendar = function(req, res) {
 db.deleteGoal();
 db.updateGoal();
 }
+
+
+/*/ DELETE
+// implementing the ability to remove goals
+exports.delete_goal = function(req, res) { 
+    db.deleteGoal();
+    res.redirect('/mycalendar');
+}
+
+// EDIT 
+// implementing the ability to edit goals 
+exports.update_goal = function(req, res) {
+    db.updateGoal();
+    res.redirect('/mycalendar');
+}*/
 
 // NEW GOAL
 // implementing the ability to use the new goal form 
@@ -71,8 +105,11 @@ exports.post_new_goals = function(req, res) {
     res.redirect('/mycalendar');
 }
 
+// ERRORS
+//implementing the app's ability to notify user of internal server errors 
 exports.server_error = function(err, req, res, next) {
     res.status(500);
     res.type('text/plain');
     res.send('Internal Server Error.');
 }
+

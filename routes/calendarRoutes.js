@@ -10,17 +10,18 @@ router.get("/", controller.landing_page);
 router.get('/register', controller.show_register_page);
 router.post('/register', controller.post_new_user);
 
+// routes for the login page
+router.get('/login', controller.show_login_page);
+router.post('/login', auth.authorize('/login'), controller.post_login);
+
+router.get('/logout', controller.logout);
+
 // route for the user's goal calendar page
 router.get('/mycalendar', controller.goal_calendar);
 
 // routes for the new goal goal page
 router.get('/newgoals', controller.show_new_goals);
 router.post('/newgoals', controller.post_new_goals);
-
-// HTML response
-router.get('/about', function(req, res) {
-    res.redirect('/about.html');
-})
 
 // 404 response
 router.use(function(req, res) {

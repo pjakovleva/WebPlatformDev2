@@ -1,14 +1,20 @@
 const Datastore = require('nedb');
+const auth = require('../auth/auth.js');
+const { ensureLoggedIn } = require('connect-ensure-login');
 
 class GoalCalendar {
 
     // constructor for the GoalPlanner class
     constructor(dbFilePath) {
         if (dbFilePath) {
-            this.db = new Datastore({ filename: dbFilePath, autoload: true });
-         } else {
+            this.db = new Datastore({
+                filename: dbFilePath,
+                autoload: true
+            });
+        } else {
             this.db = new Datastore();
-    } }
+        }
+    }
 
     // seeding the database for in-memory use
     init() {
@@ -149,35 +155,6 @@ class GoalCalendar {
             });
     }
 
-// function that allows a goal to be modified
-updateGoal() {
-    return new Promise((resolve, reject) => {
-    this.db.update({
-        'author': 'John', 'weekGoals.typeOfExercise': 'Swimming'
-    }, {
-        $set: {
-            'typeOfExercise': 'Volleyball'
-        }
-    }, {}, function(err, newDocs) {
-        if (err) {
-            console.log('Failed to update goal: ', err);
-        } else {
-            console.log(newDocs, 'Goal successfully updated.');
-        }
-    })
-})}
-
-    // function that allows to delete goals for the week
-    deleteGoal() {
-        return new Promise((resolve, reject) => {
-        this.db.remove({ status: 'Complete' }, {}, function(err, numRemoved) {
-            if (err) {
-                console.log('Error deleting goals: ', err);
-            } else {
-                console.log(numRemoved, 'Goals successfully deleted,');
-            }
-        })
-    })}
 
     // function that retrieves all goals from the database
     getAllGoals() {
@@ -192,53 +169,71 @@ updateGoal() {
         })
     }
 
-// search goal by type of exercise
-getJohnsGoals() {
-    return new Promise((resolve, reject) => {
-        this.db.find({ 'John': user }, function(err, goals) {
-            if (err) {
-                reject(err);
-            } else {
-                resolve(goals);
-                console.log('Search results: ', goals);
-            }
-        })
-    })
-}
-
-getGoalsByPolina(author) {
-    return new Promise((resolve, reject) => {
-        this.db.find({ 'author': author }, function(err, goals) {
-            if (err) {
-                reject(err);
-            } else {
-                resolve(goals);
-            }
+    getGoalsByPolina(author) {
+        return new Promise((resolve, reject) => {
+            this.db.find({ 'author': author }, function(err, goals) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(goals);
+                }
 }) })
 }
 
- // function that allows new goals to be created and added to the database
- addGoals(author, week, dayOfWeek, dateOfMonth, typeOfExercise, goalDuration) {
-    var goals = {
-        author: author,
-        week: week,
-        weekGoals: {
-        dayOfWeek,
-        dateOfMonth,
-        typeOfExercise,
-        goalDuration }
-    };
-    console.log('New goals created:', dayOfWeek)
+    // function that allows to delete goals for the week
+    deleteGoal() {
+        return new Promise((resolve, reject) => {
+        this.db.remove({ status: 'Complete' }, {}, function(err, numRemoved) {
+            if (err) {
+                console.log('Error deleting goals: ', err);
+            } else {
+                console.log(numRemoved, 'Goals successfully deleted,');
+            }
+        })
+    })}
 
-    this.db.insert(goals, function(err, doc) {
-        if (err) {
-            console.log('Error inserting a new goals to database.', typeOfExercise);
-        } else {
-            console.log('New goals added to database.', doc);
-        }
-    });
+    // function that allows a goal to be modified
+    updateGoal() {
+        return new Promise((resolve, reject) => {
+        this.db.update({
+            'author': 'John', 'weekGoals.typeOfExercise': 'Swimming'
+        }, {
+            $set: {
+                'typeOfExercise': 'Volleyball'
+            }
+        }, {}, function(err, newDocs) {
+            if (err) {
+                console.log('Failed to update goal: ', err);
+            } else {
+                console.log(newDocs, 'Goal successfully updated.');
+            }
+        })
+    })}
+
+    // function that allows new goals to be created and added to the database
+    addGoals(author, week, dayOfWeek, dateOfMonth, typeOfExercise, goalDuration) {
+        var goals = {
+            author: author,
+            week: week,
+            weekGoals: {
+            dayOfWeek,
+            dateOfMonth,
+            typeOfExercise,
+            goalDuration }
+        };
+        console.log('New goals created:', dayOfWeek)
+
+        this.db.insert(goals, function(err, doc) {
+            if (err) {
+                console.log('Error inserting a new goals to database.', typeOfExercise);
+            } else {
+                console.log('New goals added to database.', doc);
+            }
+        });
+    }
+
 }
 
-}
-
+// Making the module visible outside
 module.exports = GoalCalendar;
+
