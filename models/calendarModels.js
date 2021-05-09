@@ -232,6 +232,19 @@ class GoalCalendar {
         });
     }
 
+            // Shareable link implementation attempt. Function that retrieves a goal by its ID. 
+        getGoalByID(_id) {
+            return new Promise((resolve, reject) => {
+                this.db.find({ "_id": _id }, function (err, goals) {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(goals);
+                    }
+                });
+            });
+        }
+
 }
 
 // Making the module visible outside

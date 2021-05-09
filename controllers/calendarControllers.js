@@ -71,21 +71,6 @@ db.deleteGoal();
 db.updateGoal();
 }
 
-
-/*/ DELETE
-// implementing the ability to remove goals
-exports.delete_goal = function(req, res) { 
-    db.deleteGoal();
-    res.redirect('/mycalendar');
-}
-
-// EDIT 
-// implementing the ability to edit goals 
-exports.update_goal = function(req, res) {
-    db.updateGoal();
-    res.redirect('/mycalendar');
-}*/
-
 // NEW GOAL
 // implementing the ability to use the new goal form 
 exports.show_new_goals = function(req, res) {
@@ -103,6 +88,24 @@ exports.post_new_goals = function(req, res) {
 }
     db.addGoals(req.body.author, req.body.week, req.body.dayOfWeek, req.body.dateOfMonth, req.body.typeOfExercise, req.body.goalDuration);
     res.redirect('/mycalendar');
+}
+
+// Shareable link function attempt. 
+exports.view_goal = function(req, res){
+    var url_string = request.url;
+    var url = new URL(url_string)
+    var link = url.searchParams.get("link");
+    var link = "09voF8To05MFxVkz";
+    db.getGoalByID(link)
+        .then((list) => {
+            response.render("viewgoals", {
+                "title": "Goals",
+                "week": list
+            });
+        })
+        .catch((err) => {
+            console.log('Error generating link:', link, err);
+        });
 }
 
 // ERRORS
