@@ -91,7 +91,7 @@ exports.post_new_goals = function(req, res) {
 }
 
 // Shareable link function attempt. 
-exports.view_goal = function(req, res){
+/*exports.view_goal = function(req, res){
     var url_string = request.url;
     var url = new URL(url_string)
     var link = url.searchParams.get("link");
@@ -106,7 +106,7 @@ exports.view_goal = function(req, res){
         .catch((err) => {
             console.log('Error generating link:', link, err);
         });
-}
+}*/
 
 // ERRORS
 //implementing the app's ability to notify user of internal server errors 
