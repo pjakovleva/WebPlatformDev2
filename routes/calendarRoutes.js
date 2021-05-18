@@ -25,6 +25,11 @@ router.get('/mycalendar', ensureLoggedIn('/login'), controller.goal_calendar);
 router.get('/newgoals', ensureLoggedIn('/login'), controller.show_new_goals);
 router.post('/newgoals', ensureLoggedIn('/login'), controller.post_new_goals);
 
+// route for the stopwatch page
+router.get('/stopwatch', function(req, res) {
+    res.redirect('stopwatch.html');
+});
+
 // 404 response
 router.use(function(req, res) {
     res.status(404);

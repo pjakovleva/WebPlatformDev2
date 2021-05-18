@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Stopwatch</title>
+    <link rel='stylesheet' href='styles.css'>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+    <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous'>
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.1.0/css/all.css' crossorigin='anonymous'>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css'>
+    <script src='//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js'></script>
+
+</head>
+
+<body>
+
+<a href='/mycalendar' class='btn btn-primary'>Goal Calendar</a>
+
+<a href='/stopwatch' class='btn btn-primary'>Stopwatch</a>
+
+    <div class='container'>
+        <div id='display'>
+            00:00:00
+        </div>
+        <div class='buttons'>
+            <button id='startStop' class='btn btn-primary' onclick='startStop()'>Start</button> <button id='reset' class='btn btn-primary' onclick='reset()'>Reset</button> 
+        </div>
+    </div>
+
+<script type='text/javascript' src='stopwatch.js'></script>
+
+</body>
+
+</html>
